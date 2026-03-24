@@ -74,9 +74,13 @@ export default function App() {
     updateResultNode("__loading__");
 
     try {
-      const { data } = await axios.post("http://localhost:5000/api/ask-ai", {
-        prompt,
-      });
+      5000;
+      const { data } = await axios.post(
+        "https://backend-1-s30x.onrender.com/api/ask-ai",
+        {
+          prompt,
+        },
+      );
       updateResultNode(data.answer);
     } catch (err) {
       updateResultNode(
@@ -92,7 +96,7 @@ export default function App() {
       return alert("Run the flow first!");
 
     try {
-      await axios.post("http://localhost:5000/api/save", {
+      await axios.post("https://backend-1-s30x.onrender.com/api/save", {
         prompt,
         response: result,
       });
