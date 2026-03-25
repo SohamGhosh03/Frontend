@@ -18,8 +18,8 @@ export default function App() {
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
   const [saved, setSaved] = useState(false);
-  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-  // const BASE_URL = "http://localhost:5000";
+  // const BASE_URL = "https://backend-1-s30x.onrender.com";
+  const BASE_URL = "http://localhost:5000";
   console.log(BASE_URL);
 
   const handlePromptChange = useCallback((val) => {
@@ -78,7 +78,7 @@ export default function App() {
 
     try {
       5000;
-      const { data } = await axios.post(`${BASE_URL}/api/ask-ai`, {
+      const { data } = await axios.post(`${BASE_URL}/ask-ai`, {
         prompt,
       });
       updateResultNode(data.answer);
