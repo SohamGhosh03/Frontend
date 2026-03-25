@@ -18,6 +18,9 @@ export default function App() {
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
   const [saved, setSaved] = useState(false);
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  // const BASE_URL = "http://localhost:5000";
+  console.log(BASE_URL);
 
   const handlePromptChange = useCallback((val) => {
     setPrompt(val);
@@ -75,12 +78,9 @@ export default function App() {
 
     try {
       5000;
-      const { data } = await axios.post(
-        "https://backend-1-s30x.onrender.com/api/ask-ai",
-        {
-          prompt,
-        },
-      );
+      const { data } = await axios.post(`${BASE_URL}/api/ask-ai`, {
+        prompt,
+      });
       updateResultNode(data.answer);
     } catch (err) {
       updateResultNode(
@@ -96,7 +96,7 @@ export default function App() {
       return alert("Run the flow first!");
 
     try {
-      await axios.post("https://backend-1-s30x.onrender.com/api/save", {
+      await axios.post(`${BASE_URL}/save`, {
         prompt,
         response: result,
       });
@@ -173,7 +173,7 @@ export default function App() {
         </button>
       </div>
 
-      {/* 🔥 FULLY FIXED AREA */}
+      {/* FULLY FIXED AREA */}
       <div style={{ flex: 1, width: "100%", height: "100%" }}>
         <ReactFlow
           nodes={nodes}
@@ -183,11 +183,11 @@ export default function App() {
           nodeTypes={nodeTypes}
           fitView
           fitViewOptions={{ padding: 0.4 }}
-          panOnDrag={false} // ❌ NO DRAGGING
-          zoomOnScroll={false} // ❌ NO ZOOM
+          panOnDrag={false}
+          zoomOnScroll={false}
           zoomOnDoubleClick={false}
           zoomOnPinch={false}
-          nodesDraggable={false} // ❌ nodes also fixed
+          nodesDraggable={false}
         >
           <Background color="rgba(167,139,250,0.06)" gap={28} size={1} />
           <Controls />
